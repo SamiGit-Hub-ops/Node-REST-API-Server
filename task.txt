@@ -1,0 +1,46 @@
+Hybrid web server
+
+REST API for JSON data, and when used with /api it renders JSON accordingly for mobile devs so they can do customize rendering
+
+GET  /users  ->  List all users - HTML Document
+
+GET  /api/users  ->  List all users - JSON
+GET  /api/users/1  ->  Get user with id 1 
+GET  /api/users/2  ->  Get user with id 2 
+     //we can do the above 2 using Dynamic Path Parameters ->  GET  /api/users/:id   which means :id is a variable
+
+    //we can test these below operations CMD    
+POST  /api/users  ->  Create new user
+
+PATCH /api/users/5  ->  Edit user with ID 5
+
+DELETE /api/users/4  ->  Delete user with ID 4
+
+
+--------------------------------------------------------
+MongoDB link
+https://cloud.mongodb.com/v2/693cdb53d3f9055e347950d3#/explorer/693cdd4a640ad75b816c3a8f/usersDataBase/users/find
+
+GET
+Invoke-WebRequest -Uri http://localhost:8000/api/users/200000
+Invoke-RestMethod -Uri http://localhost:8000/api/users/200000
+
+
+power shell commands to simulate postman operations
+
+POST
+Invoke-RestMethod -Uri http://localhost:8000/api/users -Method Post -Body '{ "first_name":"Tom","last_name":"Page","email":"tompage@freewebs.com","gender":"Male","job_title":"Engineer" }' -ContentType 'application/json' | Format-List
+
+
+
+PUT
+Invoke-RestMethod -Uri http://localhost:8000/api/users/693efcfa3da1ce08f759e9fc -Method Put -Body '{"firstName":"Jim","lastName":"Muller","email":"jmuller@freewebs.com","gender":"Male","jobTitle":"Athlete"}' -ContentType 'application/json' 
+
+PATCH
+Invoke-RestMethod -Uri http://localhost:8000/api/users/693efcfa3da1ce08f759e9fc -Method Patch -Body '{"firstName":"Bryan", "email": "bray@email.com"}' -ContentType 'application/json' 
+
+Invoke-RestMethod -Uri http://localhost:8000/api/users/693efcfa3da1ce08f759e9fc -Method Patch -Body '{"firstName":"Skyler" }' -ContentType 'application/json' 
+
+
+DELETE
+Invoke-RestMethod -Uri http://localhost:8000/api/users/693efcfa3da1ce08f759e9fc -Method Delete
